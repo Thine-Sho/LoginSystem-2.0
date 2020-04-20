@@ -2,6 +2,6 @@
 #16/04/20
 
 Started a project to build a simple login system.
-  Reasons:
+  *Reasons:
     - Improve knowledge on iterators.
     - Improve debugging skills.S
