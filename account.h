@@ -18,7 +18,7 @@ class account{
         map<string, int> account_d;
         map<char,int>::iterator it;
         string ID; int password, clearence_lvl;
-        string ufile="accounts.dat", lfile="logs.dat", mfile= "methods.dat";
+        string ufile="accounts.dat", lfile="logs.dat";
 
     enum clearences{
         Guest,
