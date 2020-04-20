@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <iterator>
 #include <map>
 using namespace std;
 
@@ -13,10 +14,12 @@ class account{
         int clearence_check(const string*, const int*);
 
     private: //Variables, etc.
-        bool valid; map<string, int> account_d;
+        bool valid;
+        map<string, int> account_d;
+        map<char,int>::iterator it;
         string ID; int password, clearence_lvl;
         string ufile="accounts.dat", lfile="logs.dat", mfile= "methods.dat";
-    
+
     enum clearences{
         Guest,
         Regular,
@@ -71,7 +74,7 @@ void account::menu(const string* ID, const int* pass){
 void account::account_logout(const string* user, const int* pass){
     valid = validation(user, pass);
     if(valid){
-        
+
     }
 }
 
@@ -79,13 +82,12 @@ void account::account_login(const string* user, const int* pass){
     ifstream file;
     file.open(ufile, ios::in);
     valid = validation(user, pass);
-    map<string, int> clearence_only;
 
     if(valid){
         if(file.is_open()){
             while(!file.eof()){
                 file >> ID >> password >> clearence_lvl;
-                account_d.insert(pair(ID, password));
+                account_d.insert(make_pair(ID, password));
             }
             file.close();
             for(auto& x: account_d){
@@ -99,10 +101,10 @@ void account::account_login(const string* user, const int* pass){
                         break;
                     }else{
                         cout << "\nISSUE: could not process password; @account_login()\n";
-                        break;                       
+                        break;
                     }
                 }else if(*user != x.first){
-                    //uncomment for debugging 
+                    //uncomment for debugging
                     // cout << "\nERROR: Invalid ID; @account_login()\n";
                 }else{
                     cout << "\nISSUE: could not process ID; @account_login()\n";
@@ -131,7 +133,7 @@ int account::clearence_check(const string* user, const int* pass){
         if(file.is_open()){
             while(!file.eof()){
                 file >> ID >> password >> clearence;
-                account_d.insert(pair(ID, clearence));
+                account_d.insert(make_pair(ID, clearence));
             }
             file.close();
             for(auto& x: account_d){
@@ -140,7 +142,7 @@ int account::clearence_check(const string* user, const int* pass){
                         // cout << clearence_lvl;
                         break;
                 }else if(*user != x.first){
-                    //uncomment for debugging 
+                    //uncomment for debugging
                     // cout << "\nERROR: Invalid ID; @clearence_check()\n";
                 }else{
                     cout << "\nISSUE: could not process ID; @clearence_check()\n";
@@ -196,7 +198,7 @@ bool account::validation(const string* user, const int* pass){
     if(file.is_open()){
         while(!file.eof()){
             file >> ID >> password >> clearence_lvl;
-            account_d.insert(pair(ID, password));
+            account_d.insert(make_pair(ID, password));
         }
         file.close();
         for(auto& x: account_d){
