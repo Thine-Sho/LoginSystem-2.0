@@ -93,7 +93,7 @@ void account::account_login(const string* user, const int* pass){
             for(auto& x: account_d){
                 if(*user == x.first){
                     if(*pass == x.second){
-                        cout << "\nLogged IN\n";
+                        cout << "\nLogged in as, '" << *user << "'\n'";
                         menu(user, pass);
                         break;
                     }else if(*pass != x.second){
