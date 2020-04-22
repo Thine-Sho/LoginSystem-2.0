@@ -5,4 +5,4 @@ Started a project to build a simple login system.
 - Reasons:
   - Improve knowledge on iterators.
   - Improve debugging skills
-  - Improve data structures
+  - Improve data structurez.
